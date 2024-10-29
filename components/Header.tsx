@@ -23,18 +23,18 @@ const Header: React.FC = () => {
         }`}
       >
         <div className='flex items-center justify-between p-4 py-8'>
-          <Link href='/' className='flex items-center'>
-            <Image src='/Logo.png' width={50} height={50} alt='Emerge Logo' />
-            <span className='ml-4 text-4xl font-bold'>Emerge</span>
+          <Link href='/' className='flex flex-col md:flex-row items-center'>
+            <Image src='/Logo.png' width={80} height={50} alt='Emerge Logo' />
+            <span className='p-2 md:ml-4 text-4xl font-bold'>Emerge</span>
           </Link>
           <nav className='hidden md:flex space-x-4'>
-            <Link href='/' className='hover:text-gray-400'>
+            <Link href='/' className='hover:text-secondary'>
               Home
             </Link>
-            <Link href='/events' className='hover:text-gray-400'>
+            <Link href='/events' className='hover:text-secondary'>
               Events
             </Link>
-            <Link href='/explore' className='hover:text-gray-400'>
+            <Link href='/explore' className='hover:text-secondary'>
               Explore
             </Link>
           </nav>
@@ -43,8 +43,8 @@ const Header: React.FC = () => {
           </div>
           <div className='md:hidden flex items-center'>
             <Button
-              variant='default'
-              className='bg-accent hover:bg-slate-300 hover:text-slate-900'
+              variant='ghost'
+              className='bg-accent'
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               <Menu size={24} />

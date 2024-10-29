@@ -40,11 +40,7 @@ export const SearchBar = ({ defaultValue }: iDefault) => {
         onKeyDown={handleKeyPress}
         className='bg-transparent text-white'
       />
-      <Button
-        variant='default'
-        className='ml-2 bg-accent hover:bg-accent'
-        onClick={handleSearch}
-      >
+      <Button variant='ghost' className='ml-2 bg-accent' onClick={handleSearch}>
         <Search size={24} />
       </Button>
     </div>

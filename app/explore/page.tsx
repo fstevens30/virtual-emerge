@@ -9,6 +9,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem
 } from '@/components/ui/dropdown-menu'
+import { Button } from '@/components/ui/button'
 
 const Explore = () => {
   const searchParams = useSearchParams()
@@ -56,7 +57,7 @@ const Explore = () => {
 
   return (
     <>
-      <h1 className='text-4xl text-center font-bold mt-56'>Explore</h1>
+      <h1 className='text-4xl text-center font-bold'>Explore</h1>
       <div className='flex md:flex-row flex-col items-center justify-center mt-4'>
         <DropdownMenu>
           <DropdownMenuTrigger className='mx-2 p-2 border w-1/3 mt-2'>
@@ -64,10 +65,10 @@ const Explore = () => {
           </DropdownMenuTrigger>
           <DropdownMenuContent>
             <DropdownMenuItem onSelect={() => setYear('')}>
-              All Years
+              <strong>All Years</strong>
             </DropdownMenuItem>
-            {uniqueYears.map((year, index) => (
-              <DropdownMenuItem key={index} onSelect={() => setYear(year)}>
+            {uniqueYears.map(year => (
+              <DropdownMenuItem key={year} onSelect={() => setYear(year)}>
                 {year}
               </DropdownMenuItem>
             ))}
@@ -79,13 +80,13 @@ const Explore = () => {
           </DropdownMenuTrigger>
           <DropdownMenuContent>
             <DropdownMenuItem onSelect={() => setSemester('')}>
-              All Semesters
+              <strong>All Semesters</strong>
             </DropdownMenuItem>
             <DropdownMenuItem onSelect={() => setSemester(1)}>
-              1
+              Semester 1
             </DropdownMenuItem>
             <DropdownMenuItem onSelect={() => setSemester(2)}>
-              2
+              Semester 2
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -95,11 +96,11 @@ const Explore = () => {
           </DropdownMenuTrigger>
           <DropdownMenuContent>
             <DropdownMenuItem onSelect={() => setPathway('')}>
-              All Pathways
+              <strong>All Pathways</strong>
             </DropdownMenuItem>
             {uniquePathways.map((pathway, index) => (
               <DropdownMenuItem
-                key={index}
+                key={pathway}
                 onSelect={() => setPathway(pathway)}
               >
                 {pathway}
@@ -108,34 +109,24 @@ const Explore = () => {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <div className='flex justify-center mt-4'>
-        <button
-          onClick={handleReset}
-          className='mx-2 p-2 border bg-red-500 text-white'
-        >
-          Reset
-        </button>
-      </div>
-      <div className='grid md:grid-cols-2 lg:grid-cols-3 lg:max-w-screen-lg md:max-w-screen-md mx-auto md:gap-4 p-4'>
-        {filteredProjects.length > 0 ? (
-          filteredProjects.map((project, index) => (
-            <ProjectCard
-              key={index}
-              projectName={project.projectName}
-              studentName={project.studentName}
-              year={project.year.toString()}
-              semester={project.semester.toString()}
-              pathway={project.pathway}
-              introduction={project.introduction}
-              phone={project.phone}
-              email={project.email}
-            />
-          ))
-        ) : (
-          <div className='col-span-full text-center text-gray-500'>
-            No projects found
-          </div>
-        )}
+      <Button className='mx-auto' onClick={handleReset}>
+        Clear
+      </Button>
+      <div className='mt-4 grid md:grid-cols-2 md:max-w-screen-md gap-4 mx-auto p-4'>
+        {filteredProjects.map(project => (
+          <ProjectCard
+            key={project.projectId}
+            projectId={project.projectId}
+            projectName={project.projectName}
+            studentName={project.studentName}
+            semester={project.semester.toString()}
+            year={project.year.toString()}
+            pathway={project.pathway}
+            introduction={project.introduction}
+            phone={project.phone}
+            email={project.email}
+          />
+        ))}
       </div>
     </>
   )

@@ -20,7 +20,7 @@ const events = [
 export default function Events () {
   return (
     <>
-      <h1 className='text-4xl text-center font-bold mt-56'>Events</h1>
+      <h1 className='text-4xl text-center font-bold'>Events</h1>
 
       <h2 className='text-2xl text-center mt-4'>Next Event</h2>
       <p>Next event details</p>

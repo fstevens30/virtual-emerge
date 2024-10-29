@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 import {
   Card,
   CardHeader,
@@ -8,6 +9,7 @@ import {
 } from '@/components/ui/card'
 
 interface ProjectCardProps {
+  projectId: number
   projectName: string
   studentName: string
   semester: string
@@ -19,6 +21,7 @@ interface ProjectCardProps {
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
+  projectId,
   projectName,
   studentName,
   semester,
@@ -26,18 +29,20 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   pathway
 }) => {
   return (
-    <Card className='mt-4 md:mt-0'>
-      <CardHeader>
-        <CardTitle>{projectName}</CardTitle>
-        <CardDescription>{studentName}</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <p>{pathway}</p>
-        <p>
-          Semester {semester}, {year}
-        </p>
-      </CardContent>
-    </Card>
+    <Link href={`/project/${projectId}`}>
+      <Card className='mt-4 md:mt-0 cursor-pointer hover:bg-gray-100'>
+        <CardHeader>
+          <CardTitle>{projectName}</CardTitle>
+          <CardDescription>{studentName}</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <p>{pathway}</p>
+          <p>
+            Semester {semester}, {year}
+          </p>
+        </CardContent>
+      </Card>
+    </Link>
   )
 }
 
