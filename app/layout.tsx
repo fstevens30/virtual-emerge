@@ -5,13 +5,8 @@ import { Metadata } from 'next'
 import Footer from '@/components/Footer'
 
 const geistSans = localFont({
-  src: './fonts/GeistVF.woff',
+  src: './fonts/StagRegular.woff',
   variable: '--font-geist-sans',
-  weight: '100 900'
-})
-const geistMono = localFont({
-  src: './fonts/GeistMonoVF.woff',
-  variable: '--font-geist-mono',
   weight: '100 900'
 })
 
@@ -29,7 +24,7 @@ export default function RootLayout ({
 }>) {
   return (
     <html lang='en'>
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className={`${geistSans.variable}`}>
         <Header />
         <div className='mt-96 md:mt-80'>{children}</div>
         <Footer />
