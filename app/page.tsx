@@ -33,7 +33,7 @@ export default function Home () {
           width={800}
           height={400}
           alt='Hero'
-          className='rounded-lg mt-8'
+          className='rounded-lg my-16'
         />
       </main>
 

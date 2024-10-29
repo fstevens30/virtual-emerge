@@ -38,10 +38,10 @@ export const SearchBar = ({ defaultValue }: iDefault) => {
         value={inputValue ?? ''}
         onChange={handleChange}
         onKeyDown={handleKeyPress}
-        className='bg-transparent text-white'
+        className='bg-white text-white'
       />
-      <Button variant='ghost' className='ml-2 bg-accent' onClick={handleSearch}>
-        <Search size={24} />
+      <Button className='ml-2' onClick={handleSearch}>
+        <Search size={48} />
       </Button>
     </div>
   )
