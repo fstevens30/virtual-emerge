@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button'
+import ProjectPoster from '@/components/ProjectPoster'
 import projects from '@/public/projects.json'
 
 type ProjectPageProps = {
@@ -56,7 +56,7 @@ const ProjectPage = async ({ params }: ProjectPageProps) => {
           </div>
 
           <div className='p-8 my-auto'>
-            <Button variant='default'>View Poster</Button>
+            <ProjectPoster />
           </div>
         </div>
       </div>
