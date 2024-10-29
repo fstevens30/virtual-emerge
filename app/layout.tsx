@@ -1,8 +1,9 @@
 import localFont from 'next/font/local'
 import './globals.css'
 import Header from '@/components/Header'
-import { Metadata } from 'next'
+import { Metadata, Viewport } from 'next'
 import Footer from '@/components/Footer'
+import { siteConfig } from '@/config/site'
 
 const geistSans = localFont({
   src: './fonts/StagRegular.woff',
@@ -10,11 +11,17 @@ const geistSans = localFont({
   weight: '100 900'
 })
 
-// Bring back metadata
 export const meta: Metadata = {
-  title: 'Virtual Emerge',
-  description:
-    'Explore Ara Institute of Canterbury Bachelor of Information and Communication Technologies student final year projects, in the Virtual Emerge showcase.'
+  title: siteConfig.name,
+  description: siteConfig.description
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1.0,
+  minimumScale: 1.0,
+  viewportFit: 'cover',
+  themeColor: '#154b8f'
 }
 
 export default function RootLayout ({
@@ -26,7 +33,7 @@ export default function RootLayout ({
     <html lang='en'>
       <body className={`${geistSans.variable}`}>
         <Header />
-        <div className='mt-96 md:mt-80'>{children}</div>
+        <div className='mt-80 max-w-3xl mx-auto'>{children}</div>
         <Footer />
       </body>
     </html>

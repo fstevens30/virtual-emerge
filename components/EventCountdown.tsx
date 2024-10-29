@@ -14,9 +14,9 @@ export default function EventCountdown ({ onClose }: EventCountdownProps) {
     seconds: 0
   })
 
-  useEffect(() => {
-    const eventDate = new Date('2024-12-31').getTime()
+  const eventDate = new Date('2024-11-30').getTime()
 
+  useEffect(() => {
     const updateCountdown = () => {
       const currentDate = new Date().getTime()
       const distance = eventDate - currentDate
@@ -34,7 +34,12 @@ export default function EventCountdown ({ onClose }: EventCountdownProps) {
     const intervalId = setInterval(updateCountdown, 1000)
 
     return () => clearInterval(intervalId)
-  }, [])
+  }, [eventDate])
+
+  const currentDate = new Date().getTime()
+  const daysUntilEvent = Math.floor(
+    (eventDate - currentDate) / (1000 * 60 * 60 * 24)
+  )
 
   return (
     <div className='bg-red-400 text-white flex justify-center text-center py-1 fixed top-0 left-0 right-0'>

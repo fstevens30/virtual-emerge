@@ -14,12 +14,19 @@ import { Button } from '@/components/ui/button'
 const Explore = () => {
   const searchParams = useSearchParams()
   const q = searchParams.get('q')
+  const initialYear = searchParams.get('year')
+  const initialSemester = searchParams.get('semester')
   const [filteredProjects, setFilteredProjects] = useState(projects)
-  const [year, setYear] = useState<number | ''>('')
-  const [semester, setSemester] = useState<number | ''>('')
+  const [year, setYear] = useState<number | ''>(
+    initialYear ? parseInt(initialYear) : ''
+  )
+  const [semester, setSemester] = useState<number | ''>(
+    initialSemester ? parseInt(initialSemester) : ''
+  )
   const [pathway, setPathway] = useState('')
 
   const uniqueYears = [...new Set(projects.map(project => project.year))]
+  uniqueYears.sort((a, b) => b - a)
   const uniquePathways = [...new Set(projects.map(project => project.pathway))]
 
   useEffect(() => {
@@ -53,6 +60,7 @@ const Explore = () => {
     setYear('')
     setSemester('')
     setPathway('')
+    history.pushState({}, '', '/explore')
   }
 
   return (
@@ -60,7 +68,7 @@ const Explore = () => {
       <h1 className='text-4xl text-center font-bold'>Explore</h1>
       <div className='flex md:flex-row flex-col items-center justify-center mt-4'>
         <DropdownMenu>
-          <DropdownMenuTrigger className='mx-2 p-2 border w-1/3 mt-2'>
+          <DropdownMenuTrigger className='mx-2 p-2 border w-1/2 mt-2'>
             {year || 'Select Year'}
           </DropdownMenuTrigger>
           <DropdownMenuContent>
@@ -75,8 +83,8 @@ const Explore = () => {
           </DropdownMenuContent>
         </DropdownMenu>
         <DropdownMenu>
-          <DropdownMenuTrigger className='mx-2 p-2 border w-1/3 mt-2'>
-            {semester || 'Select Semester'}
+          <DropdownMenuTrigger className='mx-2 p-2 border w-1/2 mt-2'>
+            {semester ? `Semester ${semester}` : 'Select Semester'}
           </DropdownMenuTrigger>
           <DropdownMenuContent>
             <DropdownMenuItem onSelect={() => setSemester('')}>
@@ -91,14 +99,14 @@ const Explore = () => {
           </DropdownMenuContent>
         </DropdownMenu>
         <DropdownMenu>
-          <DropdownMenuTrigger className='mx-2 p-2 border w-1/3 mt-2'>
+          <DropdownMenuTrigger className='mx-2 p-2 border w-1/2 mt-2'>
             {pathway || 'Select Pathway'}
           </DropdownMenuTrigger>
           <DropdownMenuContent>
             <DropdownMenuItem onSelect={() => setPathway('')}>
               <strong>All Pathways</strong>
             </DropdownMenuItem>
-            {uniquePathways.map((pathway, index) => (
+            {uniquePathways.map(pathway => (
               <DropdownMenuItem
                 key={pathway}
                 onSelect={() => setPathway(pathway)}
@@ -109,13 +117,17 @@ const Explore = () => {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <Button className='mx-auto' onClick={handleReset}>
+      <Button
+        variant='outline'
+        onClick={handleReset}
+        className='mt-4 mx-auto flex'
+      >
         Clear
       </Button>
-      <div className='mt-4 grid md:grid-cols-2 md:max-w-screen-md gap-4 mx-auto p-4'>
-        {filteredProjects.map(project => (
+      <div className='grid p-4 md:p-2 md:grid-cols-2  gap-4 mt-4'>
+        {filteredProjects.map((project, index) => (
           <ProjectCard
-            key={project.projectId}
+            key={index}
             projectId={project.projectId}
             projectName={project.projectName}
             studentName={project.studentName}

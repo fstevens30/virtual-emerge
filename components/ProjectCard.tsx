@@ -7,6 +7,7 @@ import {
   CardContent,
   CardDescription
 } from '@/components/ui/card'
+import Image from 'next/image'
 
 interface ProjectCardProps {
   projectId: number
@@ -32,14 +33,29 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     <Link href={`/project/${projectId}`}>
       <Card className='mt-4 md:mt-0 cursor-pointer hover:bg-gray-100'>
         <CardHeader>
-          <CardTitle>{projectName}</CardTitle>
-          <CardDescription>{studentName}</CardDescription>
+          <div className='flex justify-between'>
+            <div className='flex flex-col'>
+              <CardTitle>{projectName}</CardTitle>
+              <CardDescription className='font-bold'>
+                {studentName}
+              </CardDescription>
+            </div>
+            <Image
+              src='/images/profile.png'
+              alt={studentName}
+              width={128}
+              height={128}
+              className='rounded-md'
+            />
+          </div>
         </CardHeader>
         <CardContent>
-          <p>{pathway}</p>
-          <p>
-            Semester {semester}, {year}
-          </p>
+          <div className='flex justify-between mt-2'>
+            <p className='text-muted-foreground'>{pathway}</p>
+            <p className='text-muted-foreground'>
+              Semester {semester}, {year}
+            </p>
+          </div>
         </CardContent>
       </Card>
     </Link>

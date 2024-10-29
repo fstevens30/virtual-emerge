@@ -24,7 +24,7 @@ export default function Home () {
 
         <Link href='/explore'>
           <div className='mt-8 bg-accent text-white rounded-lg hover:bg-gray-100 hover:text-primary'>
-            <p className='py-4 px-12'>Explore</p>
+            <p className='text-2xl py-4 px-12'>Explore</p>
           </div>
         </Link>
 
