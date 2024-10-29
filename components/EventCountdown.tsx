@@ -40,7 +40,7 @@ export default function EventCountdown ({ onClose }: EventCountdownProps) {
     <div className='bg-red-400 text-white flex justify-center text-center py-1 fixed top-0 left-0 right-0'>
       <button
         onClick={onClose}
-        className='absolute top-0 right-0 mt-1 mr-2 text-white font-bold'
+        className='absolute top-0 right-0 mt-3 mr-3 text-white font-bold'
       >
         <X size={24} />
       </button>
