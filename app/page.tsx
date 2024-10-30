@@ -28,16 +28,18 @@ export default function Home () {
           </div>
         </Link>
 
-        <Image
-          src='/images/event-image.jpg'
-          width={800}
-          height={400}
-          alt='Hero'
-          className='rounded-lg my-16'
-        />
+        <div className='my-16 p-4'>
+          <Image
+            src='/images/event-image.jpg'
+            width={800}
+            height={400}
+            alt='Hero'
+            className='rounded-lg'
+          />
+        </div>
       </main>
 
-      <div className='flex flex-col items-center justify-center mx-auto mt-8 bg-gray-100 p-4'>
+      <div className='flex flex-col items-center justify-center mx-auto mt-8 p-4'>
         <h2 className='text-xl font-semibold'>About</h2>
         <div className='max-w-3xl'>
           <p className='text-lg mt-4'>

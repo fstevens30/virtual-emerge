@@ -26,13 +26,22 @@ export default function Events () {
       <h1 className='text-4xl text-center font-bold'>Events</h1>
 
       <h2 className='text-2xl text-center mt-8'>Next Event</h2>
-      <p className='text-center mt-4'>
+      <p className='text-center mt-4 p-4'>
         The next Emerge event will be held on {formatDate(siteConfig.nextEvent)}{' '}
         at 7pm at Te Ōhaka, Ara Institute of Canterbury. We hope to see you
         there, food and drinks will be provided.
       </p>
+      <div className='mt-4 p-4'>
+        <Image
+          src='/images/te-ohaka.webp'
+          width={800}
+          height={400}
+          alt='Te Ōhaka'
+          className='rounded-lg'
+        />
+      </div>
 
-      <h2 className='text-2xl text-center mt-8'>Previous Events</h2>
+      <h2 className='text-2xl text-center mt-6'>Previous Events</h2>
       <div className='grid p-4 md:grid-cols-2 gap-4'>
         {events.map((event, index) => (
           <Link

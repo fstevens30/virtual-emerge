@@ -28,13 +28,13 @@ const Header: React.FC = () => {
             <span className='p-2 ml-4 text-4xl font-bold'>Emerge</span>
           </Link>
           <nav className='hidden md:flex space-x-4'>
-            <Link href='/' className='hover:text-secondary'>
+            <Link href='/' className='hover:underline'>
               Home
             </Link>
-            <Link href='/events' className='hover:text-secondary'>
+            <Link href='/events' className='hover:underline'>
               Events
             </Link>
-            <Link href='/explore' className='hover:text-secondary'>
+            <Link href='/explore' className='hover:underline'>
               Explore
             </Link>
           </nav>
@@ -52,21 +52,21 @@ const Header: React.FC = () => {
           <div className='md:hidden flex flex-col left-0 right-0 bg-primary text-white p-4'>
             <Link
               href='/'
-              className='hover:text-gray-400 py-2'
+              className='hover:underline py-2'
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               Home
             </Link>
             <Link
               href='/events'
-              className='hover:text-gray-400 py-2'
+              className='hover:underline py-2'
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               Events
             </Link>
             <Link
               href='/explore'
-              className='hover:text-gray-400 py-2'
+              className='hover:underline py-2'
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               Explore

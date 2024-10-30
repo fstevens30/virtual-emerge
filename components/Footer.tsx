@@ -7,7 +7,7 @@ export default function Footer () {
         <p>&copy; Ara Institute of Canterbury 2024</p>
         <p>Made by Flynn Stevens</p>
       </div>
-      <div className='flex flex-col md:mr-4 md:text-end'>
+      <div className='flex flex-col mt-8 md:mt-0 md:mr-4 md:text-end'>
         <Link href='https://www.ara.ac.nz/' target='_blank'>
           <p className='hover:underline'>Ara Website</p>
         </Link>
