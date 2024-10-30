@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
-import { Menu } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from './ui/button'
 import EventCountdown from '@/components/EventCountdown'
@@ -22,11 +22,18 @@ const Header: React.FC = () => {
           isBannerVisible ? 'mt-12' : 'mt-0'
         }`}
       >
-        <div className='flex items-center justify-between p-4 py-8'>
-          <Link href='/' className='flex  items-center'>
-            <Image src='/Logo.png' width={80} height={50} alt='Emerge Logo' />
-            <span className='p-2 ml-4 text-4xl font-bold'>Emerge</span>
+        <div className='flex items-center justify-between p-4'>
+          {/*Mobile Header Images */}
+          <Link href='/' className='items-center flex flex-col'>
+            <Image
+              src='/logo-landscape.png'
+              width={150}
+              height={50}
+              alt='Emerge Logo'
+            />
+            <span className='p-2 text-4xl font-bold'>Emerge</span>
           </Link>
+
           <nav className='hidden md:flex space-x-4'>
             <Link href='/' className='hover:underline'>
               Home
@@ -44,7 +51,7 @@ const Header: React.FC = () => {
           <div className='md:hidden flex items-center'>
             <Button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
               <p className='text-white text-lg'>Menu</p>
-              <Menu size={48} />
+              {isMobileMenuOpen ? <X size={100} /> : <Menu size={100} />}
             </Button>
           </div>
         </div>

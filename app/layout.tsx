@@ -5,9 +5,9 @@ import { Metadata, Viewport } from 'next'
 import Footer from '@/components/Footer'
 import { siteConfig } from '@/config/site'
 
-const geistSans = localFont({
+const stagSans = localFont({
   src: './fonts/StagRegular.woff',
-  variable: '--font-geist-sans',
+  variable: '--font-stag-sans',
   weight: '100 900'
 })
 
@@ -31,9 +31,9 @@ export default function RootLayout ({
 }>) {
   return (
     <html lang='en'>
-      <body className={`${geistSans.variable}`}>
+      <body className={`${stagSans.variable}`}>
         <Header />
-        <div className='mt-80 max-w-3xl mx-auto'>{children}</div>
+        <div className='mt-64 max-w-3xl mx-auto'>{children}</div>
         <Footer />
       </body>
     </html>

@@ -1,5 +1,8 @@
+import ProjectPaper from '@/components/ProjectPaper'
 import ProjectPoster from '@/components/ProjectPoster'
 import projects from '@/public/projects.json'
+import { Mail, Phone } from 'lucide-react'
+import Image from 'next/image'
 
 type ProjectPageProps = {
   params: {
@@ -20,10 +23,12 @@ const ProjectPage = async ({ params }: ProjectPageProps) => {
   return (
     <div className='p-4'>
       <div className='flex justify-center'>
-        <img
+        <Image
           src='/images/profile.png'
           alt={project.studentName}
-          className='w-32 h-32 rounded-full'
+          width={150}
+          height={150}
+          className='rounded-lg'
         />
         <div className='flex flex-col justify-center ml-4'>
           <h1 className='text-4xl text-center font-bold'>
@@ -37,8 +42,10 @@ const ProjectPage = async ({ params }: ProjectPageProps) => {
       <hr className='my-4' />
 
       <div className='flex flex-col justify-center'>
-        <p className='text-center font-semibold'>{project.pathway}</p>
-        <p className='text-center font-semibold'>
+        <p className='text-center font-bold text-muted-foreground'>
+          {project.pathway}
+        </p>
+        <p className='text-center font-bold text-muted-foreground '>
           Semester {project.semester}, {project.year}
         </p>
       </div>
@@ -49,14 +56,21 @@ const ProjectPage = async ({ params }: ProjectPageProps) => {
         </div>
 
         <div className='flex justify-between'>
-          <div className='my-4 p-8'>
+          <div className=' p-8'>
             <h2 className='text-2xl font-bold'>Contact</h2>
-            <p className='mt-2'>{project.phone}</p>
-            <p className='mt-2'>{project.email}</p>
+            <div className='flex'>
+              <Phone />
+              <p className='mt-2'>{project.phone}</p>
+            </div>
+            <div className='flex justify-between'>
+              <Mail />
+              <p className='mt-2'>{project.email}</p>
+            </div>
           </div>
 
-          <div className='p-8 my-auto'>
+          <div className='flex flex-col justify-evenly'>
             <ProjectPoster />
+            <ProjectPaper />
           </div>
         </div>
       </div>
