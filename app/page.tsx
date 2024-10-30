@@ -1,3 +1,4 @@
+import { Button } from '@/components/ui/button'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -5,6 +6,7 @@ export default function Home () {
   return (
     <div className='bg-white w-full'>
       <main className='flex flex-col items-center mx-auto p-4 justify-center max-w-3xl h-3/4'>
+        <h1 className='text-4xl font-bold mt-8'>Virtual Emerge</h1>
         <h2 className='text-xl font-semibold mt-2'>
           Celebrating the success of our Bachelor of ICT and Graduate Diploma in
           ICT students.
@@ -23,9 +25,7 @@ export default function Home () {
         </p>
 
         <Link href='/explore'>
-          <div className='mt-8 bg-accent text-white rounded-lg hover:bg-gray-100 hover:text-primary'>
-            <p className='text-2xl py-4 px-12'>Explore</p>
-          </div>
+          <Button className='mt-8'>Explore</Button>
         </Link>
 
         <div className='my-16 p-4'>

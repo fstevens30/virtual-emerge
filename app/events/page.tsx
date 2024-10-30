@@ -52,13 +52,6 @@ export default function Events () {
               <p className='text-xl font-semibold text-center'>
                 Semester {event.semester}, {event.year}
               </p>
-              <Image
-                src='/images/event-group.jpg'
-                alt='Event Image'
-                width={400}
-                height={200}
-                className='mx-auto'
-              />
             </div>
           </Link>
         ))}

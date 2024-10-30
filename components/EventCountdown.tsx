@@ -1,12 +1,7 @@
 'use client'
-import { X } from 'lucide-react'
 import React, { useState, useEffect } from 'react'
 
-interface EventCountdownProps {
-  onClose: () => void
-}
-
-export default function EventCountdown ({ onClose }: EventCountdownProps) {
+export default function EventCountdown () {
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -36,23 +31,12 @@ export default function EventCountdown ({ onClose }: EventCountdownProps) {
     return () => clearInterval(intervalId)
   }, [eventDate])
 
-  const currentDate = new Date().getTime()
-  const daysUntilEvent = Math.floor(
-    (eventDate - currentDate) / (1000 * 60 * 60 * 24)
-  )
-
   return (
-    <div className='bg-red-400 text-white flex justify-center text-center py-1 fixed top-0 left-0 right-0'>
-      <button
-        onClick={onClose}
-        className='absolute top-0 right-0 mt-3 mr-3 text-white font-bold'
-      >
-        <X size={24} />
-      </button>
-      <h1 className='text-lg font-bold p-2'>Next Emerge Event</h1>
-      <h2 className='text-lg font-bold p-2'>
-        {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m{' '}
-        {timeLeft.seconds}s
+    <div className='bg-red-500 text-white flex justify-center text-center py-1 fixed top-0 left-0 right-0'>
+      <h1 className='text-lg p-2'>Next Emerge Event</h1>
+      <h2 className='text-lg p-2'>
+        {timeLeft.days} : {timeLeft.hours} : {timeLeft.minutes} :{' '}
+        {timeLeft.seconds}
       </h2>
     </div>
   )
