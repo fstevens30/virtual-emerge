@@ -43,20 +43,20 @@ export default function EventCountdown ({ onClose }: EventCountdownProps) {
   )
 
   return (
-    <Link href='/events'>
-      <div className='bg-red-400 text-white flex justify-center text-center py-1 fixed top-0 left-0 right-0'>
-        <button
-          onClick={onClose}
-          className='absolute top-0 right-0 mt-3 mr-3 text-white font-bold'
-        >
-          <X size={24} />
-        </button>
+    <div className='bg-red-400 text-white flex justify-center text-center py-1 fixed top-0 left-0 right-0'>
+      <button
+        onClick={onClose}
+        className='absolute top-0 right-0 mt-3 mr-3 text-white font-bold'
+      >
+        <X size={24} />
+      </button>
+      <Link href='/events'>
         <h1 className='text-lg font-bold p-2'>Next Emerge Event</h1>
         <h2 className='text-lg font-bold p-2'>
           {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m{' '}
           {timeLeft.seconds}s
         </h2>
-      </div>
-    </Link>
+      </Link>
+    </div>
   )
 }
