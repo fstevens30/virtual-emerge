@@ -37,11 +37,6 @@ export default function EventCountdown ({ onClose }: EventCountdownProps) {
     return () => clearInterval(intervalId)
   }, [eventDate])
 
-  const currentDate = new Date().getTime()
-  const daysUntilEvent = Math.floor(
-    (eventDate - currentDate) / (1000 * 60 * 60 * 24)
-  )
-
   return (
     <div className='bg-red-400 text-white flex justify-center text-center py-1 fixed top-0 left-0 right-0'>
       <button
@@ -51,11 +46,13 @@ export default function EventCountdown ({ onClose }: EventCountdownProps) {
         <X size={24} />
       </button>
       <Link href='/events'>
-        <h1 className='text-lg font-bold p-2'>Next Emerge Event</h1>
-        <h2 className='text-lg font-bold p-2'>
-          {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m{' '}
-          {timeLeft.seconds}s
-        </h2>
+        <div className='flex'>
+          <h1 className='text-lg font-bold py-2'>Next Emerge Event: </h1>
+          <h2 className='text-lg font-bold p-2'>
+            {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m{' '}
+            {timeLeft.seconds}s
+          </h2>
+        </div>
       </Link>
     </div>
   )
