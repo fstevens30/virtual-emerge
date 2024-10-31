@@ -10,6 +10,7 @@ import {
   DropdownMenuItem
 } from '@/components/ui/dropdown-menu'
 import { Button } from '@/components/ui/button'
+import { Filter } from 'lucide-react'
 
 const Explore = () => {
   const searchParams = useSearchParams()
@@ -69,7 +70,12 @@ const Explore = () => {
       <div className='flex md:flex-row flex-col items-center justify-center mt-4'>
         <DropdownMenu>
           <DropdownMenuTrigger className='mx-2 p-2 border w-1/2 mt-2'>
-            {year || 'Select Year'}
+            {year || (
+              <p>
+                Select Year
+                <Filter className='inline ml-2' />
+              </p>
+            )}
           </DropdownMenuTrigger>
           <DropdownMenuContent>
             <DropdownMenuItem onSelect={() => setYear('')}>
@@ -84,7 +90,14 @@ const Explore = () => {
         </DropdownMenu>
         <DropdownMenu>
           <DropdownMenuTrigger className='mx-2 p-2 border w-1/2 mt-2'>
-            {semester ? `Semester ${semester}` : 'Select Semester'}
+            {semester ? (
+              `Semester ${semester}`
+            ) : (
+              <p>
+                Select Semester
+                <Filter className='inline ml-2' />
+              </p>
+            )}
           </DropdownMenuTrigger>
           <DropdownMenuContent>
             <DropdownMenuItem onSelect={() => setSemester('')}>
@@ -100,7 +113,12 @@ const Explore = () => {
         </DropdownMenu>
         <DropdownMenu>
           <DropdownMenuTrigger className='mx-2 p-2 border w-1/2 mt-2'>
-            {pathway || 'Select Pathway'}
+            {pathway || (
+              <p>
+                Select Pathway
+                <Filter className='inline ml-2' />
+              </p>
+            )}
           </DropdownMenuTrigger>
           <DropdownMenuContent>
             <DropdownMenuItem onSelect={() => setPathway('')}>
