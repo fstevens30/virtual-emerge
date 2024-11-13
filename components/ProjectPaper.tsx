@@ -11,7 +11,15 @@ import {
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 
-export default function ProjectPaper () {
+interface ProjectPaperProps {
+  projectId: number
+  studentName: string
+}
+
+export default function ProjectPaper ({
+  projectId,
+  studentName
+}: ProjectPaperProps) {
   // Handle Dialog open and close
   const [isDialogOpen, setIsDialogOpen] = useState(false)
 
@@ -25,6 +33,12 @@ export default function ProjectPaper () {
     document.body.removeChild(link)
   }
 
+  const [pdfError, setPdfError] = useState<{ [key: number]: boolean }>({})
+
+  const handlePdfError = (index: number) => {
+    setPdfError(prev => ({ ...prev, [index]: true }))
+  }
+
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <DialogTrigger asChild>
@@ -34,11 +48,16 @@ export default function ProjectPaper () {
         <DialogTitle>Project Paper</DialogTitle>
         <div className='w-full' style={{ height: '65vh' }}>
           <iframe
-            src='/papers/test-paper.pdf#view=fit'
+            src={
+              pdfError[projectId]
+                ? '/images/404.png'
+                : `https://teaposgecjvklykdadhd.supabase.co/storage/v1/object/public/paper/${studentName}.pdf`
+            }
             title='Paper PDF'
             width='100%'
             height='100%'
             style={{ border: 'none' }}
+            onError={() => handlePdfError(projectId)}
           />
         </div>
         <DialogFooter>

@@ -1,4 +1,6 @@
-import React from 'react'
+'use client'
+
+import React, { useState } from 'react'
 import Link from 'next/link'
 import {
   Card,
@@ -14,11 +16,13 @@ interface ProjectCardProps {
   projectName: string
   studentName: string
   semester: string
-  year: string
+  year: number
   pathway: string
   introduction: string
-  phone: string
-  email: string
+  phone: string | undefined
+  email: string | undefined
+  linkedin: string | undefined
+  website: string | undefined
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
@@ -29,6 +33,17 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   year,
   pathway
 }) => {
+  // Image error handling
+  const [imageError, setImageError] = useState<{ [key: number]: boolean }>({})
+
+  const handleImageError = (index: number) => {
+    setImageError(prev => ({ ...prev, [index]: true }))
+  }
+
+  // Remove spaces from the student name to use in the image URL
+  // Format John Doe to JohnDoe
+  const shortStudentName = studentName.split(' ').join('')
+
   return (
     <Link href={`/project/${projectId}`}>
       <Card className='mt-4 md:mt-0 cursor-pointer hover:bg-gray-100'>
@@ -41,18 +56,23 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
               </CardDescription>
             </div>
             <Image
-              src='/images/profile.png'
+              src={
+                imageError[projectId]
+                  ? '/images/profile.png'
+                  : `https://teaposgecjvklykdadhd.supabase.co/storage/v1/object/public/headshot/${shortStudentName}.jpg`
+              }
               alt={studentName}
               width={128}
               height={128}
               className='rounded-md'
+              onError={() => handleImageError(projectId)}
             />
           </div>
         </CardHeader>
         <CardContent>
           <div className='flex justify-between mt-2'>
-            <p className='text-muted-foreground'>{pathway}</p>
-            <p className='text-muted-foreground'>
+            <p className='text-muted-foreground text-sm'>{pathway}</p>
+            <p className='text-muted-foreground text-sm'>
               Semester {semester}, {year}
             </p>
           </div>

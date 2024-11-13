@@ -1,25 +1,54 @@
-import Link from 'next/link'
+'use client'
+import { useEffect, useState } from 'react'
+import { supabase } from '../utils/supabase/supabase'
 import Image from 'next/image'
-import projects from '@/public/projects.json'
-import { siteConfig } from '@/config/site'
-import { formatDate } from '@/lib/utils'
+import Link from 'next/link'
+import { formatDate } from '../../lib/utils'
+import { siteConfig } from '../../config/site'
 
-export default function Events () {
-  // Extract unique events from projects
-  const events = projects.reduce(
-    (acc: { key: string; year: number; semester: number }[], project) => {
-      const eventKey = `${project.year}-${project.semester}`
-      if (!acc.some(event => event.key === eventKey)) {
-        acc.push({
-          key: eventKey,
-          year: project.year,
-          semester: project.semester
-        })
+const Page = () => {
+  interface Event {
+    id: number
+    year: string
+    semester: string
+  }
+
+  const [events, setEvents] = useState<Event[]>([])
+
+  useEffect(() => {
+    async function getEvents () {
+      const { data: events } = await supabase.from('events').select('*')
+
+      if (events && events.length > 1) {
+        const mappedEvents = events.map(
+          (event: { ID: number; semester: string; year: string }) => ({
+            id: event.ID,
+            semester: event.semester,
+            year: event.year
+          })
+        )
+        console.log(mappedEvents)
+        setEvents(mappedEvents)
       }
-      return acc
-    },
-    []
-  )
+    }
+
+    getEvents()
+  }, [])
+
+  // Image error handling
+  const [imageError, setImageError] = useState<{ [key: number]: boolean }>({})
+
+  const handleImageError = (index: number) => {
+    setImageError(prev => ({ ...prev, [index]: true }))
+  }
+
+  // Sort events by year and semester
+  const sortedEvents = events.sort((a, b) => {
+    if (a.year === b.year) {
+      return parseInt(a.semester) - parseInt(b.semester)
+    }
+    return parseInt(b.year) - parseInt(a.year)
+  })
 
   return (
     <>
@@ -43,7 +72,7 @@ export default function Events () {
 
       <h2 className='text-2xl text-center mt-6'>Previous Events</h2>
       <div className='grid p-4 md:grid-cols-2 gap-4'>
-        {events.map((event, index) => (
+        {sortedEvents.map((event, index) => (
           <Link
             key={index}
             href={`/explore?year=${event.year}&semester=${event.semester}`}
@@ -53,11 +82,16 @@ export default function Events () {
                 Semester {event.semester}, {event.year}
               </p>
               <Image
-                src='/images/event-group.jpg'
+                src={
+                  imageError[index]
+                    ? '/images/event-group.jpg'
+                    : `https://teaposgecjvklykdadhd.supabase.co/storage/v1/object/public/eventgroup/S${event.semester}${event.year}.jpg`
+                }
                 alt='Event Image'
                 width={400}
                 height={200}
-                className='mx-auto'
+                className='mx-auto rounded-md'
+                onError={() => handleImageError(index)}
               />
             </div>
           </Link>
@@ -66,3 +100,5 @@ export default function Events () {
     </>
   )
 }
+
+export default Page

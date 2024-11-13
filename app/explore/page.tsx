@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
 import ProjectCard from '@/components/ProjectCard'
-import projects from '@/public/projects.json'
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -11,13 +10,30 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { Button } from '@/components/ui/button'
 import { Filter } from 'lucide-react'
+import { supabase } from '../utils/supabase/supabase'
+
+interface ProjectType {
+  projectId: number
+  projectName: string
+  studentName: string
+  semester: string
+  year: number
+  pathway: string
+  introduction: string
+  phone?: string
+  email?: string
+  linkedin?: string
+  website?: string
+  eventId: string
+}
 
 const Explore = () => {
   const searchParams = useSearchParams()
   const q = searchParams.get('q')
   const initialYear = searchParams.get('year')
   const initialSemester = searchParams.get('semester')
-  const [filteredProjects, setFilteredProjects] = useState(projects)
+  const [projects, setProjects] = useState<ProjectType[]>([]) // Initialize projects state
+  const [filteredProjects, setFilteredProjects] = useState<ProjectType[]>([])
   const [year, setYear] = useState<number | ''>(
     initialYear ? parseInt(initialYear) : ''
   )
@@ -26,8 +42,49 @@ const Explore = () => {
   )
   const [pathway, setPathway] = useState('')
 
+  useEffect(() => {
+    async function getData () {
+      const { data: projects } = await supabase.from('projects').select('*')
+
+      if (projects && projects.length > 0) {
+        const mappedProjects = projects.map(
+          (project: {
+            projectId: number
+            projectName: string
+            studentName: string
+            semester: string
+            year: number
+            pathway: string
+            introduction: string
+            phone: string
+            email: string
+            linkedin: string
+            website: string
+            eventId: string
+          }) => ({
+            projectId: project.projectId,
+            projectName: project.projectName,
+            studentName: project.studentName,
+            semester: project.semester,
+            year: project.year,
+            pathway: project.pathway,
+            introduction: project.introduction,
+            phone: project.phone,
+            email: project.email,
+            linkedin: project.linkedin,
+            website: project.website,
+            eventId: project.eventId
+          })
+        )
+
+        setProjects(mappedProjects)
+      }
+    }
+
+    getData()
+  }, [])
+
   const uniqueYears = [...new Set(projects.map(project => project.year))]
-  uniqueYears.sort((a, b) => b - a)
   const uniquePathways = [...new Set(projects.map(project => project.pathway))]
 
   useEffect(() => {
@@ -43,11 +100,15 @@ const Explore = () => {
     }
 
     if (year) {
-      filtered = filtered.filter(project => project.year === year)
+      filtered = filtered.filter(
+        project => parseInt(project.year.toString()) === year
+      )
     }
 
     if (semester) {
-      filtered = filtered.filter(project => project.semester === semester)
+      filtered = filtered.filter(
+        project => parseInt(project.semester || '0') === semester
+      )
     }
 
     if (pathway) {
@@ -55,7 +116,7 @@ const Explore = () => {
     }
 
     setFilteredProjects(filtered)
-  }, [q, year, semester, pathway])
+  }, [q, year, semester, pathway, projects])
 
   const handleReset = () => {
     setYear('')
@@ -149,12 +210,14 @@ const Explore = () => {
             projectId={project.projectId}
             projectName={project.projectName}
             studentName={project.studentName}
-            semester={project.semester.toString()}
-            year={project.year.toString()}
+            semester={project.semester}
+            year={project.year}
             pathway={project.pathway}
             introduction={project.introduction}
             phone={project.phone}
             email={project.email}
+            linkedin={project.linkedin}
+            website={project.website}
           />
         ))}
       </div>

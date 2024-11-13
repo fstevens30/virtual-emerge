@@ -11,7 +11,15 @@ import {
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 
-export default function ProjectPoster () {
+interface ProjectPosterProps {
+  projectId: number
+  studentName: string
+}
+
+export default function ProjectPoster ({
+  projectId,
+  studentName
+}: ProjectPosterProps) {
   // Handle Dialog open and close
   const [isDialogOpen, setIsDialogOpen] = useState(false)
 
@@ -25,6 +33,12 @@ export default function ProjectPoster () {
     document.body.removeChild(link)
   }
 
+  const [pdfError, setPdfError] = useState<{ [key: number]: boolean }>({})
+
+  const handlePdfError = (index: number) => {
+    setPdfError(prev => ({ ...prev, [index]: true }))
+  }
+
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <DialogTrigger asChild>
@@ -34,11 +48,16 @@ export default function ProjectPoster () {
         <DialogTitle>Project Poster</DialogTitle>
         <div className='w-full' style={{ height: '65vh' }}>
           <iframe
-            src='/posters/test-poster.pdf#view=fit'
+            src={
+              pdfError[projectId]
+                ? '/images/404.png'
+                : `https://teaposgecjvklykdadhd.supabase.co/storage/v1/object/public/poster/${studentName}.pdf`
+            }
             title='Poster PDF'
             width='100%'
             height='100%'
             style={{ border: 'none' }}
+            onError={() => handlePdfError(projectId)}
           />
         </div>
         <DialogFooter>
