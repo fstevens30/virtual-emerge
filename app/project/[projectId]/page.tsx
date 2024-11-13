@@ -119,7 +119,7 @@ const ProjectPage = ({ params }: ProjectPageProps) => {
           <p className='mt-2'>{project.introduction}</p>
         </div>
 
-        <div className='flex justify-between'>
+        <div className='flex flex-col md:flex-row justify-between'>
           <div className='flex flex-col justify-center'>
             {project.phone && (
               <div className='flex items-center'>
@@ -168,11 +168,12 @@ const ProjectPage = ({ params }: ProjectPageProps) => {
             )}
           </div>
 
-          <div className='flex flex-col'>
+          <div className='flex'>
             <ProjectPoster
               projectId={projectId}
               studentName={project.studentName.split(' ').join('')}
             />
+            <div className='w-4' />
             <ProjectPaper
               projectId={projectId}
               studentName={project.studentName.split(' ').join('')}

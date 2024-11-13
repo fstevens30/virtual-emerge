@@ -33,7 +33,7 @@ export default function RootLayout ({
     <html lang='en'>
       <body className={`${stagSans.variable}`}>
         <Header />
-        <div className='mt-64 max-w-3xl mx-auto'>{children}</div>
+        <div className='mt-64 max-w-3xl mx-auto min-h-screen'>{children}</div>
         <Footer />
       </body>
     </html>
