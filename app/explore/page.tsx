@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import ProjectCard from '@/components/ProjectCard'
 import {
@@ -27,7 +27,7 @@ interface ProjectType {
   eventId: string
 }
 
-const Explore = () => {
+const ExploreContent = () => {
   const searchParams = useSearchParams()
   const q = searchParams.get('q')
   const initialYear = searchParams.get('year')
@@ -222,6 +222,14 @@ const Explore = () => {
         ))}
       </div>
     </>
+  )
+}
+
+const Explore = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ExploreContent />
+    </Suspense>
   )
 }
 
