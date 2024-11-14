@@ -11,7 +11,7 @@ const stagSans = localFont({
   weight: '100 900'
 })
 
-export const meta: Metadata = {
+export const metadata: Metadata = {
   title: siteConfig.name,
   description: siteConfig.description
 }
