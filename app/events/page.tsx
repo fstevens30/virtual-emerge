@@ -57,8 +57,8 @@ const Page = () => {
       <h2 className='text-2xl text-center mt-8'>Next Event</h2>
       <p className='text-center mt-4 p-4'>
         The next Emerge event will be held on {formatDate(siteConfig.nextEvent)}{' '}
-        at 7pm at Te Ōhaka, Ara Institute of Canterbury. We hope to see you
-        there, food and drinks will be provided.
+        at 6pm - 8pm at Te Ōhaka, Ara Institute of Canterbury. We hope to see
+        you there, food and drinks will be provided.
       </p>
       <div className='mt-4 p-4'>
         <Image
