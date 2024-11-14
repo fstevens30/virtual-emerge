@@ -84,7 +84,7 @@ const ProjectPage = ({ params }: ProjectPageProps) => {
       <div className='flex justify-center'>
         <Image
           src={
-            imageError[projectId]
+            projectId !== null && imageError[projectId]
               ? '/images/profile.png'
               : `https://teaposgecjvklykdadhd.supabase.co/storage/v1/object/public/headshot/${shortStudentName}.jpg`
           }
@@ -92,7 +92,7 @@ const ProjectPage = ({ params }: ProjectPageProps) => {
           width={150}
           height={150}
           className='rounded-lg'
-          onError={() => handleImageError(projectId)}
+          onError={() => projectId !== null && handleImageError(projectId)}
         />
         <div className='flex flex-col justify-center ml-4'>
           <h1 className='text-4xl text-center font-bold'>
@@ -169,15 +169,19 @@ const ProjectPage = ({ params }: ProjectPageProps) => {
           </div>
 
           <div className='flex'>
-            <ProjectPoster
-              projectId={projectId}
-              studentName={project.studentName.split(' ').join('')}
-            />
-            <div className='w-4' />
-            <ProjectPaper
-              projectId={projectId}
-              studentName={project.studentName.split(' ').join('')}
-            />
+            {projectId !== null && (
+              <>
+                <ProjectPoster
+                  projectId={projectId}
+                  studentName={project.studentName.split(' ').join('')}
+                />
+                <div className='w-4' />
+                <ProjectPaper
+                  projectId={projectId}
+                  studentName={project.studentName.split(' ').join('')}
+                />
+              </>
+            )}
           </div>
         </div>
       </div>
