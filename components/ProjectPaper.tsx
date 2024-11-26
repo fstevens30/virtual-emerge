@@ -26,8 +26,8 @@ export default function ProjectPaper ({
   // Handle downloading PDF
   const handleDownload = () => {
     const link = document.createElement('a')
-    link.href = '/posters/test-paper.pdf'
-    link.download = 'test-paper.pdf'
+    link.href = `https://teaposgecjvklykdadhd.supabase.co/storage/v1/object/public/paper/${studentName}.pdf`
+    link.download = `${studentName}-paper.pdf`
     document.body.appendChild(link)
     link.click()
     document.body.removeChild(link)
