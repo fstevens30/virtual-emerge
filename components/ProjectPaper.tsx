@@ -24,13 +24,19 @@ export default function ProjectPaper ({
   const [isDialogOpen, setIsDialogOpen] = useState(false)
 
   // Handle downloading PDF
-  const handleDownload = () => {
+  const handleDownload = async () => {
+    const response = await fetch(
+      `https://teaposgecjvklykdadhd.supabase.co/storage/v1/object/public/paper/${studentName}.pdf`
+    )
+    const blob = await response.blob()
+    const url = window.URL.createObjectURL(blob)
     const link = document.createElement('a')
-    link.href = `https://teaposgecjvklykdadhd.supabase.co/storage/v1/object/public/paper/${studentName}.pdf`
+    link.href = url
     link.download = `${studentName}-paper.pdf`
     document.body.appendChild(link)
     link.click()
     document.body.removeChild(link)
+    window.URL.revokeObjectURL(url)
   }
 
   const [pdfError, setPdfError] = useState<{ [key: number]: boolean }>({})
