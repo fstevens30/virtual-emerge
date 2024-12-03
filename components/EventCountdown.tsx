@@ -2,6 +2,7 @@
 import { X } from 'lucide-react'
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
+import { siteConfig } from '@/config/site'
 
 interface EventCountdownProps {
   onClose: () => void
@@ -15,7 +16,7 @@ export default function EventCountdown ({ onClose }: EventCountdownProps) {
     seconds: 0
   })
 
-  const eventDate = new Date('2024-11-30').getTime()
+  const eventDate = siteConfig.nextEvent.getTime()
 
   useEffect(() => {
     const updateCountdown = () => {
